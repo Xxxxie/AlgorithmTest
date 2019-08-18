@@ -10,7 +10,7 @@ void PerOrder(BinaryTreeNode *root)
 		return ;
 	}
 
-	cout << root->m_nvalue << endl;
+	cout << root->m_nvalue <<" ";
 	PerOrder(root->m_pLeft);
 	PerOrder(root->m_pRight);
 }
@@ -33,6 +33,7 @@ BinaryTreeNode * ConstructCore(int *startPerorder, int *endPerorder, int *startI
 	root->m_nvalue = rootvalue;
 	root->m_pLeft = nullptr;
 	root->m_pRight = nullptr;
+	root->m_pParent = nullptr;
 	if (startPerorder == endPerorder )
 	{
 		if (*startInorder == *startPerorder)
@@ -62,16 +63,67 @@ BinaryTreeNode * ConstructCore(int *startPerorder, int *endPerorder, int *startI
 	if (leftLength > 0)
 	{
 		root->m_pLeft = ConstructCore(startPerorder + 1, leftPreorderEnd, startInorder, rootInorder - 1);
+		root->m_pLeft->m_pParent = root;
 	}
 	if (leftLength < endPerorder - startPerorder)
 	{
 		root->m_pRight = ConstructCore(leftPreorderEnd + 1, endPerorder, rootInorder + 1, endInorder);
+		root->m_pRight->m_pParent = root;
 	}
 
 
 	return root;
 }
+/*********************************************
+*获得中序遍历的next节点
+*1.如果节点的右节点不为空，则next节点为左子树的最左节点
+*2.否则查看节点的父结点
+*3.如果节点为父结点的左节点，则next节点为父结点
+*4.否则寻找父结点的父结点，直到寻找到为左节点的父结点node，其next为node的父结点
+*******************************************/
+BinaryTreeNode *GetNext(BinaryTreeNode *node)
+{
 
+	if (node == nullptr)
+	{
+		return nullptr;
+	}
+
+	if (node->m_pRight != nullptr)
+	{
+		BinaryTreeNode *pT = node->m_pRight;
+		while (pT->m_pLeft!=nullptr)
+		{
+			pT = pT->m_pLeft;
+		}
+		return pT;
+	}
+	else if(node->m_pParent = nullptr)
+	{
+		BinaryTreeNode * parent = node->m_pParent;
+		if (parent->m_pLeft == node)
+		{
+			return parent;
+		}
+
+		if (parent->m_pRight == node)
+		{
+			BinaryTreeNode * temp = parent->m_pParent;
+
+			while (temp != nullptr && parent != temp->m_pLeft)
+			{
+				parent = temp;
+				temp = parent->m_pParent;
+			}
+			return temp;
+
+		}
+	}
+
+	return nullptr;
+
+
+}
 
 void BinaryTest()
 {
@@ -80,5 +132,10 @@ void BinaryTest()
 	BinaryTreeNode* root = Construct(a, b, 8);
 
 	PerOrder(root);
+	cout << endl;
+
+	BinaryTreeNode* next = GetNext(root);
+	cout << next->m_nvalue << endl;
+
 
 }
