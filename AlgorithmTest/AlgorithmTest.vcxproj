@@ -154,6 +154,7 @@
     <ClInclude Include="Astart.h" />
     <ClInclude Include="Backtracking.h" />
     <ClInclude Include="BinaryTree.h" />
+    <ClInclude Include="normal.h" />
     <ClInclude Include="TemplateClass.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClCompile Include="Astart.cpp" />
     <ClCompile Include="Backtracking.cpp" />
     <ClCompile Include="BinaryTree.cpp" />
+    <ClCompile Include="normal.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
