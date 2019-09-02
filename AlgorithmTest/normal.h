@@ -20,3 +20,13 @@ void Print1toMaxifNTest();
 bool match(const char * str,const char * pattern);
 
 void matchTest();
+
+//表示数值的字符串
+bool isNumber(const char* str);
+
+void isNumberTest();
+
+//调整数组顺序使奇数位于偶数前面
+void Reorder(int * data, int num, bool(*func)(int));
+
+void ReorderTest();

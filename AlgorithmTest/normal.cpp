@@ -269,3 +269,118 @@ void matchTest()
 	cout<< match(str.c_str(),pattern.c_str())<<endl;
 	
 }
+
+
+//表示数值的字符串
+
+
+char*  scanInteger(char   *str)
+{
+	if (*str == '+' || *str == '-')
+	{
+		str++;
+	}
+
+	while (*str!='\0' && *str<='9' && *str>='0')
+	{
+		str++;
+	}
+
+
+	return str;
+}
+char*  scanUnsignInteger(char   *str)
+{
+
+	while (*str != '\0' && *str <= '9' && *str >= '0')
+	{
+		str++;
+	}
+
+
+	return str;
+}
+
+bool isNumber( char* str)
+{
+	bool result = false;
+
+
+	str = scanInteger(str);
+
+	if (*str == '.')
+	{
+		str++;
+
+		str = scanUnsignInteger(str);
+	}
+
+	if (*str == 'e' || *str == 'E')
+	{
+		str++;
+		str = scanInteger(str);
+	}
+
+
+
+
+	if (*str == '\0')
+		result = true;
+
+	return result;
+}
+
+void isNumberTest()
+{
+	char str[7] = "3.14";
+
+	cout<< isNumber(str)<<endl;
+}
+
+
+void Reorder(int * data, int num, bool(*func)(int))
+{
+	int *pBegin = data;
+	int *pEnd = data + num - 1;
+
+	while (pBegin < pEnd)
+	{
+		while (pBegin < pEnd && !func(*pBegin))
+		{
+			pBegin++;
+		}
+
+		while (pBegin < pEnd && func(*pEnd))
+		{
+			pEnd--;
+		}
+
+		if (pBegin < pEnd)
+		{
+			int temp = *pBegin;
+			*pBegin = *pEnd;
+			*pEnd = temp;
+		}
+
+	}
+
+
+}
+
+//偶数返回1
+bool isEven(int x)
+{
+	return (x & 0x1) == 0;
+}
+
+void ReorderTest()
+{
+	int a[5] = { 1,2,3,4,5 };
+	Reorder(a, 5, isEven);
+
+	for (int i = 0; i < 5; i++)
+	{
+		cout << a[i] << " ";
+	}
+	cout << endl;
+}
