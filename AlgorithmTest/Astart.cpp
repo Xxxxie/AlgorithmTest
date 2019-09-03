@@ -180,13 +180,14 @@ node initNode(node c, node currentnode, node end)
 	return c;
 }
 
+//node temp;
 
-
-node* aStartSearch(node start, node end)
+node aStartSearch(node start, node end)
 {
 	list<node> openList;
 	list<node> closeList;
 	list<node>::iterator iter;
+	node temp;
 	openList.push_back(start);
 	
 	while (openList.size() > 0)
@@ -218,16 +219,17 @@ node* aStartSearch(node start, node end)
 		{
 			if (iter->x == end.x && iter->y == end.y)
 			{
-				node temp = *iter;
-				return &temp;
+				temp = *iter;
+				return temp;
 			}
 		}
 
 
 	}
 
-	return NULL;
+	return temp;
 }
+
 
 
 void aStartTest()
@@ -235,7 +237,7 @@ void aStartTest()
 	node start(2, 1);
 	node end(2, 5);
 
-	node* resultNode = aStartSearch(start, end);
+	node resultNode = aStartSearch(start, end);
 
 	/*
 	while (resultNode->parent !=NULL)
@@ -246,21 +248,23 @@ void aStartTest()
 
 	}
 	*/
-	while (resultNode->parent != NULL)
+	int x, y;
+	while (resultNode.parent != NULL)
 	{
 		//cout << resultNode->x << " " << resultNode->y << endl;
-
-		int x = resultNode->x;
-		int y = resultNode->y;
+		
+		x = resultNode.x;
+		y = resultNode.y;
 
 
 		//printf("%d", x);
 
 		//使用cout 和cerr会出现错误，我也不知道为啥
-		cerr << x ;
+		cout << x ;
 		//cout << y;
-		cout << "hh" ;
-		resultNode = resultNode->parent;
+
+	
+		resultNode = *resultNode.parent;
 	}
 
 }
