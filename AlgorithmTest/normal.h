@@ -30,3 +30,8 @@ void isNumberTest();
 void Reorder(int * data, int num, bool(*func)(int));
 
 void ReorderTest();
+
+//À≥ ±’Î¥Ú”°æÿ’Û
+void PointMatrixClockwisely(int **number, int columsts, int rows);
+
+void PointMCTest();

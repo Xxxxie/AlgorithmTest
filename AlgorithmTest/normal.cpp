@@ -384,3 +384,59 @@ void ReorderTest()
 	}
 	cout << endl;
 }
+
+
+void PointMatrixClockCore(int** number ,int columns,int rows,int start)
+{
+
+	int endy = columns - start-1 ;
+	int endx = rows - start-1;
+
+	for (int i = start; i <= endx; i++)
+		cout << number[start][i];
+
+	
+	for (int j = start +1; j <= endy; j++)
+		cout << number[j][endx];
+
+	for (int k = endx-1; k >= start; k--)
+		cout << number[endy][k];
+
+	for (int x = endy - 1; x > start; x--)
+		cout << number[x][start];
+
+}
+void PointMatrixClockwisely(int** number , int columns, int rows)
+{
+	if (columns < 0 || rows < 0)
+		return;
+
+	for (int i = 0 ; 2 * i < columns && 2 * i  < rows; i++)
+	{
+		PointMatrixClockCore(number, columns, rows, i);
+	}
+}
+
+void PointMCTest()
+{
+	const int columns = 5;
+	const int rows = 4;
+	int** number = new int* [columns];
+	for (int i = 0; i < columns; i++)
+	{
+		number[i] = new int[rows]{i,i+1,i+2,i+3};
+	}
+
+	for (int i = 0; i < columns; i++)
+	{
+		for (int j = 0; j < rows; j++)
+		{
+			cout << number[i][j] << " ";
+		}
+	}
+
+
+
+
+	PointMatrixClockwisely(number, columns, rows);
+}
