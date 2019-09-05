@@ -35,3 +35,8 @@ void ReorderTest();
 void PointMatrixClockwisely(int **number, int columsts, int rows);
 
 void PointMCTest();
+
+//栈的压入、弹出序列
+bool IsPopOrder(const int*pPush, const int* pPop, int nLength);
+
+void IsPopOrderTest();

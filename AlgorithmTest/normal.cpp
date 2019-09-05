@@ -1,5 +1,6 @@
 #include <iostream>
 #include "normal.h"
+#include <stack>
 
 using namespace std;
 
@@ -432,11 +433,72 @@ void PointMCTest()
 		for (int j = 0; j < rows; j++)
 		{
 			cout << number[i][j] << " ";
-		}
+		} 
 	}
 
-
-
-
 	PointMatrixClockwisely(number, columns, rows);
+}
+
+bool IsPopOrder(const int*pPush, const int* pPop, int nLength)
+{
+	bool result = false;
+	if (pPush == nullptr || pPop == nullptr || nLength<=0)
+	{
+		return result;
+	}
+
+	const int * pNextPush = pPush;
+	const int * pNextPop = pPop;
+
+	stack<int> data;
+
+
+	while ( pNextPop - pPop < nLength)
+	{
+
+		while ((data.empty() ||data.top() != *pNextPop) && pNextPush - pPush < nLength)
+		{
+			data.push(*pNextPush);
+			pNextPush++;
+		}
+
+		if (data.top()== *pNextPop && pNextPush - pPush < nLength)
+		{
+			data.pop();
+			pNextPop++;
+			//pNextPush++;
+		}
+
+		if (pNextPush - pPush == nLength && !data.empty())
+		{
+			if( data.top() != *pNextPop)
+				break;
+			else
+			{
+				data.pop();
+				pNextPop++;
+			}
+		}
+
+
+	}
+
+	if (pNextPop - pPop == nLength)
+	{
+		result = true;
+	}
+
+	return result;
+
+
+}
+
+void IsPopOrderTest()
+{
+	int pPush[5] = { 1,2,3,4,5 };
+	int pPop[5] = { 1,2,5,3,4 };
+
+	cout << IsPopOrder(pPush, pPop, 5) << endl;;
+
+
 }
