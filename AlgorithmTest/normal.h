@@ -40,3 +40,9 @@ void PointMCTest();
 bool IsPopOrder(const int*pPush, const int* pPop, int nLength);
 
 void IsPopOrderTest();
+
+
+//二叉搜索树的后序遍历序列
+bool VeritySquenceOfBST(int squence[], int length);
+
+void VerityOfBSTTest();

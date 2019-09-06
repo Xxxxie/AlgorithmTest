@@ -502,3 +502,54 @@ void IsPopOrderTest()
 
 
 }
+
+
+bool VeritySquenceOfBST(int squence[], int length)
+{
+	bool result = false;
+	int root = squence[length - 1];
+
+	int i = 0;
+	for (; i < length-1; i++)
+	{
+		if (squence[i] > root)
+		{
+			break;
+		}
+	}
+
+	int j = i;
+	for (; j < length-1; j++)
+	{
+		if (squence[j] < root)
+			return false;
+	}
+
+	bool left = true;
+
+	if (i > 0)
+	{
+		left = VeritySquenceOfBST(squence, i);
+	}
+
+	bool right = true;
+	if (i < length-1)
+	{
+		right = VeritySquenceOfBST(squence + i , length - i -1);
+	}
+
+
+	return (left&& right);
+
+
+
+
+
+
+}
+void VerityOfBSTTest()
+{
+	int array[6] = { 8,5,6,9,11,10 };
+
+	cout << VeritySquenceOfBST(array, 6);
+}
